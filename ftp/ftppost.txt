@@ -1,0 +1,5 @@
+open 192.168.0.107
+user anonymous
+password 123
+put ./message.txt
+bye
