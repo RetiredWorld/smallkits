@@ -4,7 +4,7 @@ set ftpIp=192.168.0.107
 set userName=anonymous
 set passWord=123
 set ftpGetFile=ftpget.txt
-set ftpMessageFile=./message.txt
+set ftpMessageFile=message.txt
 
 :start
 set /p flag="press key to read,"r" to copy to clip board,exit for exit:"
@@ -20,14 +20,15 @@ echo get %ftpMessageFile%>>%ftpGetFile%
 echo bye>>%ftpGetFile%
 ftp -n -s:"%ftpGetFile%"
 echo complish
-set /p string=<%ftpMessageFile%
 
 
 :: r for copy to clipboard, or merely output
-if %flag%==r echo %string% | clip
-echo the received string is "%string%"
+if %flag%==r clip<%ftpMessageFile%
 
-
+echo.
+echo the received string is:
+for /f "delims=[" %%i in (message.txt) do echo %%i
+echo.
 :: loop here
 goto start
 
